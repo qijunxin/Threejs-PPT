@@ -406,7 +406,7 @@ var simpleDemo = function(){
 		scene.add(light);
 
 		var geometry = new THREE.BoxGeometry(200,200,200);
-		var texture = new THREE.TextureLoader().load('http://p2.qhimg.com/t019306dbf5093e00c2.jpg');
+		var texture = new THREE.TextureLoader().load('https://p2.ssl.qhimg.com/t019306dbf5093e00c2.jpg');
 		var material = new THREE.MeshLambertMaterial( {map:texture});
 		cube = new THREE.Mesh( geometry, material);
 		scene.add(cube);
@@ -443,7 +443,7 @@ var RAFDemo = function(){
 		// earth
 
 		var loader = new THREE.TextureLoader();
-		var texture = loader.load( 'http://p8.qhimg.com/t014de28b7cbcea05f7.jpg');
+		var texture = loader.load( 'https://p2.ssl.qhimg.com/t014de28b7cbcea05f7.jpg');
 		var geometry = new THREE.SphereGeometry( 200, 20, 20 );
 
 		var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
