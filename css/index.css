@@ -1,0 +1,117 @@
+#mesh-container{
+	transition:transform .8s linear; 
+}
+#mesh-desc{
+	position: absolute;
+	top: 400px;
+	right: -150px;
+	opacity: 0;
+	transition:opacity .5s linear .7s; 
+	text-align: left;
+}
+small{
+	font-size: 16px;
+}
+#mesh-desc small{
+	margin-left: 50px;
+}
+.camera-img{
+	margin-top: 30px;
+}
+#camera-container {
+	width: 1200px;
+	height: 900px;
+	margin: 0 auto;
+}
+slides>slide.demo-1 .slide-wrapper{
+	justify-content:flex-start;
+}
+#demo-1-container{
+	width:550px;
+	height:550px;
+	margin: 0 auto;
+}
+.demo-1 h4 {
+    color: #fff;
+    margin-bottom: 10px
+}
+#star-demo {
+	width: 800px;
+	height: 800px;
+	margin: 0 auto;
+}
+
+#raf-demo {
+	width: 400px;
+	height: 400px;
+	margin: 0 auto;
+}
+
+#cow-demo{
+	width: 600px;
+	height: 600px;
+	position: absolute;
+	top: -50px;
+	right: -100px;
+}
+
+@keyframes blink {
+	0% {
+		background: rgb(247,68,97);
+	}
+	50%{
+		background: rgb(185,227,217);	
+	}
+	100%{
+		background: rgb(230,179,61);			
+	}
+}
+
+slides>slide.slide-demo .slide-wrapper,
+slides>slide.camera-demo  .slide-wrapper{
+	max-width: 2000px;
+}
+.element {
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	font-size: 80px;
+	text-align: center;
+	color: #61C3C2;
+	border: 1px solid rgba(0,127,127,.6);
+	animation: blink 1s ease-in infinite;
+}
+@keyframes blink{
+	0%{
+		opacity: 0.8;
+	}
+	10%{
+		opacity: 0.2;
+	}
+}
+#stop-animate,
+#change-camera {
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 18px;
+	position: absolute;
+	bottom: 50px;
+	right: 50px;
+	color: #f0f0f0;
+	background: #F55A46;
+	z-index: 9999;
+	cursor: pointer;
+}
+slides>slide .slide-wrapper img.tuxing{
+	max-height: 1000px;
+	width: 500px;
+	position: absolute;
+	top: 0;
+	right: -300px;
+	z-index:10;
+}
+#demo-container {
+	width: 800px;
+	height: 800px;
+	margin: 0 auto;
+}

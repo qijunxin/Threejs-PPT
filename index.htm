@@ -1,0 +1,700 @@
+<!--
+    Powered By nodePPT - This is probably the best web presentation tool so far!
+    version: 1.4.2
+    site: https://github.com/ksky521/nodePPT
+    date: 2016年8月5日
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WebGL - Three.js 分享 - By 齐俊鑫</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>WebGL - Three.js 分享</h1>
+<h2>演讲者：齐俊鑫</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>教学大纲</h1>
+
+</hgroup><article>
+
+<ol>
+<li><p>WebGL与Three.js</p>
+</li>
+<li><p>3D图形基础知识</p>
+<ul>
+<li>3D坐标系</li>
+<li>网格、材质、纹理</li>
+<li>相机</li>
+<li>着色器</li>
+</ul>
+</li>
+<li><p>Three.js实践</p>
+<ul>
+<li>渲染器 renderer</li>
+<li>场景   scene</li>
+<li>相机   camera</li>
+<li>光源   light</li>
+<li>网格   mesh</li>
+<li>渲染   render</li>
+</ul>
+</li>
+<li><p>3D动画</p>
+<ul>
+<li>RequestAnimationFrame()</li>
+<li>补间动画</li>
+<li>CSS3D动画 Animation</li>
+</ul>
+</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>WebGL与Three.js</h1>
+<ul class="fadeIn">
+<li><p><small>OpenGL 是指定义了一个跨编程语言、跨平台的编程接口规格的专业的图形程序接口。它用于三维图像（二维的亦可），是一个功能强大，调用方便的底层图形库。</small></p></li>
+<li><p><small>WebGL 是Javascript的API，是一种网络标准，定义了一些较底层的图形接口，可以看做是将OpenGL移植到了网页平台的web规范</small></p></li>
+<li><p><small>Three.js</small></p></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<p><h1>3D图形基础知识</h1></p>
+<h2><h2>3D坐标系</h2></h2>
+<div><img src="./image/256px-3D_coordinate_system.png" style="width:500px"></div>
+</article></section></slide>
+<slide class="slide" id="slide-mesh" data-on-enter=animateForMesh data-on-leave=clearMesh><section class="slide-wrapper"><hgroup>
+<div id="mesh-title">
+    <h1>3D图形基础知识</h1>
+    <h2>网格、材质、纹理</h2>
+</div>
+</hgroup><article>
+
+<div id="mesh-container"></div><div id="mesh-desc">
+    <p>网格 mesh -> 模型</p>
+    <p>几何体 geometry <small>用来勾勒出形状，保存了顶点位置信息</small></p>
+    <p>材质 material <small>描述外观，包括色彩、反射、明暗等属性</small></p>
+    <p>纹理 <small>使用一个或者多个位图来表示外观信息</small></p>
+
+</div>
+</article></section></slide>
+<slide class="slide"   data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><article class="flexbox vcenter">
+<p><h1>3D图形基础知识</h1></p>
+<p><h2>相机</h2></p>
+<h2><small>相机定义了用户相对于场景的位置和朝向</small></h2>
+<div class="magic"><div class="magicItem current pagedown" data-transition="fade"><article>
+<div class="magic-wrapper">
+<article>
+<div>
+    <img src="./image/graphics_fundamentals_viewport_3dscene.png" alt="">
+</div><p style="margin-top:20px"><small>视野fov，近剪裁平面(视口)，远剪裁平面，视见体</small></p>
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown" data-transition="fade"><article>
+<div class="magic-wrapper">
+<article>
+<div>
+    <p>PerspectiveCamera / OrthographicCamera</p>
+    <p>透视相机 / 正投影相机</p>
+    <img src="./image/camera.png" class="camera-img">
+</div>
+</article>
+</div>
+</article></div></div>
+</article></section></slide>
+<slide class="camera-demo slide" data-on-enter=initCameraDemo lass="camera-demo" data-on-leave=clearCameraDemo><section class="slide-wrapper"><article>
+<div id="camera-container"></div><div id="change-camera">切换</div>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<p><h1>3D图形基础知识</h1></p>
+<p><h2>着色器 Shader</h2></p>
+<p><small>又称为“可编程着色器”，是一段源代码，实现了将网格像素点投影到屏幕上的算法</small></p>
+<p><small>可以处理材质、光源、变换以及相机</small></p>
+<p><small>Vertex Shader顶点着色器 和 Pixel Shader像素着色器</small></p>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>Three.js实践</h1>
+
+</hgroup><article>
+
+<ul class="fadeIn">
+<li>渲染器 renderer</li>
+<li>场景   scene</li>
+<li>相机   camera</li>
+<li>光源   light</li>
+<li>网格   mesh</li>
+<li>渲染   render</li>
+</ul>
+
+</article></section></slide>
+<slide class="demo-1 slide" class="emo-1" data-on-enter=simpleDemo data-on-leave=clearSimple  data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><article>
+<div id="demo-1-container"></div><div class="magic"><div class="magicItem current pagedown"  data-transition=zoomin><article>
+<div class="magic-wrapper">
+<article>
+<h2><h4>创建渲染器renderer</h4></h2>
+<p><pre><code class="javascript">
+    renderer = new THREE.WebGLRenderer({antialias:true});
+    renderer.setSize(container.offsetWidth,container.offsetHeight);
+    container.appendChild(renderer.domElement);
+</code></pre></p>
+<div style="color:#fff;font-size:18px">
+CanvasRenderer 、 CSS3DRenderer 、 SVGRenderer ...
+</div>
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown"  data-transition=zoomin><article>
+<div class="magic-wrapper">
+<article>
+<h2><h4>创建场景</h4></h2>
+<pre><code class="javascript">
+    scene = new THREE.Scene();
+</code></pre>
+</article>
+</div>
+</article></div>
+<div class="magicItem far-next pagedown"  data-transition=zoomin><article>
+<div class="magic-wrapper">
+<article>
+<h2><h4>创建相机</h4></h2>
+<pre><code class="javascript">
+    var aspect = container.offsetWidth/container.offsetHeight;
+    camera = new THREE.PerspectiveCamera(45,aspect,1,1000);
+    camera.position.z = 550;
+    camera.lookAt(scene.position);
+    scene.add(camera);
+</code></pre>
+</article>
+</div>
+</article></div>
+<div class="magicItem "  data-transition=zoomin><article>
+<div class="magic-wrapper">
+<article>
+<h2><h4>创建光源</h4></h2>
+<p><pre><code class="javascript">
+    light = new THREE.DirectionalLight(0xf0f0f0);
+    light.position.set(0,0,5);
+    scene.add(light);
+</code></pre></p>
+<div style="color:#fff;font-size:18px">
+定向光 环境光  聚光灯  点光源
+</div>
+</article>
+</div>
+</article></div>
+<div class="magicItem "  data-transition=zoomin><article>
+<div class="magic-wrapper">
+<article>
+<h2><h4>创建网格</h4></h2>
+<p><pre><code class="javascript">
+    var geometry = new THREE.BoxGeometry(200,200,200);
+    var texture = new THREE.TextureLoader().load(&#39;/image/texture.jpg&#39;);
+    var material = new THREE.MeshLambertMaterial( {map:texture});
+    cube = new THREE.Mesh( geometry, material);
+    scene.add(cube);
+</code></pre></p>
+<div style="color:#fff;font-size:18px">
+MeshBasicMaterial 、 MeshLambertMaterial 、 MeshPhongMaterial
+</div>
+</article>
+</div>
+</article></div>
+<div class="magicItem "  data-transition=zoomin><article>
+<div class="magic-wrapper">
+<article>
+<h2><h4>渲染</h4></h2>
+<pre><code class="javascript">
+    renderer.render(scene,camera)
+</code></pre>
+</article>
+</div>
+</article></div></div>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>3D动画</h1>
+
+</hgroup><article>
+
+<ul>
+<li>RequestAnimationFrame()</li>
+<li>补间动画</li>
+<li>CSS3D动画 Animation</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide" data-on-enter=RAFDemo data-on-leave=clearRAF><section class="slide-wrapper"><article>
+<p><h2 class="raf-title">RequestAnimationFrame()</h2 class="raf-title"></p>
+<div  id="raf-demo"></div><pre><code class="javascript">
+    function animate() {
+        requestAnimationFrame( animate );
+        mesh.rotation.y += 0.005;
+        renderer.render( scene, camera );
+    }
+</code></pre>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<p><h2>补间动画</h2></p>
+<p><small>补间指的是计算一对值中间插入的其它数值的过程。</small></p>
+<p><small>由一个状态切换到另一个状态的一次性简单动画</small></p>
+<pre><code class="javascript">
+    new TWEEN.Tween(group.position)
+        .to( {x:2, y:2, z:-3}, duration*1000 )
+        .delay( delayTime*1000 )
+        .easing( TWEEN.Easing.Exponential.InOut )
+        .repeat( repeatCount )
+        .start();
+    }
+    TweenMax.to(group.position, 
+                duration, 
+                {y:0, ease:Strong.easeInOut, yoyo:true, repeat:repeatCount});
+
+</code></pre>
+</article></section></slide>
+<slide class="slide" data-on-enter=cowDemo data-on-leave=clearCow  data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><article>
+<div id="cow-demo"></div><div class="magic"><div class="magicItem current pagedown"  class="cow-code"><article>
+<div class="magic-wrapper">
+<article>
+<pre><code class="javascript">
+Cow.prototype.blink = function(){  
+    TweenMax.to(this.leftEye.scale, .3, {y:0, ease:Strong.easeInOut, yoyo:true, repeat:3});
+
+    TweenMax.to(this.rightEye.scale, .3, {y:0, ease:Strong.easeInOut, yoyo:true, repeat:3});
+
+    TweenMax.to(this.leftIris.scale, .3, {y:0, ease:Strong.easeInOut, yoyo:true, repeat:3});
+    TweenMax.to(this.rightIris.scale, .3, {y:0, ease:Strong.easeInOut, yoyo:true, repeat:3});
+}
+blinkInterval = setInterval(function(){
+  cow.blink();
+}, 4000);
+</code></pre>
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown"  class="cow-code"><article>
+<div class="magic-wrapper">
+<article>
+<pre><code class="javascript">
+var angleLegs = 0;
+function loop(){
+    angleLegs += .2;
+    var sin = Math.sin(angleLegs);
+    var cos = Math.cos(angleLegs);
+
+    renderer.render(scene, camera);
+    cow.threegroup.rotation.y +=0.01;
+
+    cow.leg1.position.z = -40 + cos*10;
+    cow.leg2.position.z = -40 + sin*10;
+    cow.leg3.position.z = 40 + sin*10;
+    cow.leg4.position.z = 40 + cos*10;
+    cow.threegroup.position.y = cos*10;
+    ...
+    requestAnimationFrame(loop);
+}    
+</code></pre>
+</article>
+</div>
+</article></div></div>
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>CSS3D动画 Animation</h2>
+</article></section></slide>
+<slide class="slide-demo slide" data-on-enter=animateForDemo data-on-leave=cleargreenDemo clas="slide-demo"><section class="slide-wrapper"><article>
+<div id="demo-container">
+    <div id="stop-animate">暂停</div><p></div></p>
+
+</article></section></slide>
+<slide class="slide"   data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><div class="magic"><div class="magicItem current pagedown" data-transition="fade"><article>
+<div class="magic-wrapper">
+<article>
+<pre><code class="javascript">
+    renderer = new THREE.CSS3DRenderer();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    document.getElementById('demo-container').appendChild(renderer.domElement);
+
+    for ( var i = 0; i < num; i ++ ) {
+        var element = document.createElement( 'div' );
+        element.className = 'element';
+        element.innerHTML='&lt;i class="fa fa-'+icons[i%40]+'">&lt;/i&gt;';
+
+        var object = new THREE.CSS3DObject( element );
+        object.position.x = Math.random() * 4000 - 2000;
+        object.position.y = Math.random() * 4000 - 2000;
+        object.position.z = Math.random() * 2000 - 2000;
+        group.add( object );
+        objects.push( object );
+    }
+    scene.add(group);
+</code></pre>
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown" data-transition="fade"><article>
+<div class="magic-wrapper">
+<article>
+<div>
+    <img class="tuxing" src="./image/tuxing1.png" alt="">
+</div><pre><code class="javascript">
+    var vector = new THREE.Vector3();
+
+    for ( var i = 0, l = objects.length; i < l; i ++ ) {
+
+        var phi = Math.acos( -1 + ( 2 * i ) / l );
+        var theta = Math.sqrt( l * Math.PI ) * phi;
+
+        var object = new THREE.Object3D();
+        object.position.x = 800 * Math.cos( theta ) * Math.sin( phi );
+        object.position.y = 800 * Math.sin( theta ) * Math.sin( phi );
+        object.position.z = 800 * Math.cos( phi );
+
+        vector.copy( object.position ).multiplyScalar( 2 );
+        object.lookAt( vector );
+
+        targets.push( object );
+
+    }
+</code></pre>
+</article>
+</div>
+</article></div>
+<div class="magicItem far-next pagedown" data-transition="fade"><article>
+<div class="magic-wrapper">
+<article>
+<pre><code class="css">
+    .element {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        font-size: 80px;
+        text-align: center;
+        color: #61C3C2;
+        border: 1px solid rgba(0,127,127,.6);
+        animation: blink 1s ease-in infinite;
+    }
+    @keyframes blink{
+        0%{
+            opacity: 0.8;
+        }
+        10%{
+            opacity: 0.2;
+        }
+    }
+</code></pre>
+</article>
+</div>
+</article></div></div></section></slide>
+<slide class="slide" data-on-enter=initStarDemo data-on-leave=clearStarDemo><section class="slide-wrapper"><article>
+<script type="x-shader/x-vertex" id="vertex-shader">
+    attribute float size;
+    attribute float idx;
+    attribute float matid;
+
+    uniform float timeline;
+
+    varying vec4 vColor;
+    varying float vMatid;
+
+    void main() {
+        vec3 color = vec3(1.0,1.0,1.0);
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+
+        float alpha = 1.0;
+        float enlarge = .0;
+
+        if(length(mvPosition.xyz) < 400.0) {
+            enlarge = (sin(timeline - idx) * 40.0);
+        } else {
+            enlarge = (sin(timeline - idx) * 10.0);
+        }
+
+
+        if(enlarge < 0.1) {
+            enlarge = .0 - enlarge + 1.0;
+        }
+
+        vColor = vec4(color, alpha);
+        vMatid = matid;
+
+        gl_Position = projectionMatrix * mvPosition;
+        gl_PointSize = 1500.0 / length(mvPosition.xyz) * size + enlarge;
+
+    }
+</script><script type="x-shader/x-fragment" id="fragment-shader">
+    uniform sampler2D texture1;
+    uniform sampler2D texture2;
+    uniform sampler2D texture3;
+    uniform sampler2D texture4;
+    varying vec4 vColor;
+    varying float vMatid;
+
+    void main() {
+        if(vMatid > 3.5) {
+            gl_FragColor = vColor * texture2D(texture4, gl_PointCoord) ;
+        } else if(vMatid > 2.5) {
+            gl_FragColor = vColor * texture2D(texture3, gl_PointCoord) ;
+        } else if(vMatid > 1.5) {
+            gl_FragColor = vColor * texture2D(texture2, gl_PointCoord) ;
+        } else {
+            gl_FragColor = vColor * texture2D(texture1, gl_PointCoord) ;
+        }
+    }
+</script><div id="star-demo"></div><p>基于着色器的动画-双鱼座</p>
+</article></section></slide>
+<slide class="slide"   data-on-build="Slide.magic" data-on-enter="Slide.magic.init"><section class="slide-wrapper"><div class="magic"><div class="magicItem current pagedown" data-transition="fade"><article>
+<div class="magic-wrapper">
+<article>
+<pre><code class="javascript">
+    var cotem = {
+        name: "双鱼座",
+        vertices: [
+            [-28.47, 20.14, 20.134999999999998], [-33.33, 15.280000000000001, 6.945], 
+            [-30, 13.89, 3.1950000000000003], [-25.7, 9.030000000000001, -.41499999999999915], 
+            [-22.92, -1.67, 3.1950000000000003], [-18.61, -23.61, -29.445], 
+            [-12.5, -10.55, -11.255000000000003], [-7.920000000000002, -1.9399999999999995, -21.255000000000003], 
+            [-1.5300000000000011, 6.11, 11.524999999999999], [8.61, 9.580000000000002, -2.2250000000000014], 
+            [11.25, 14.17, 17.085], [10.420000000000002, 14.31, 29.445], 
+            [19.58, 19.45, 6.384999999999998], [16.799999999999997, 18.75, 24.445], 
+            [30, 23.61, -1.115000000000002], [20.549999999999997, 15.700000000000001, 20.975],
+            [13.939999999999998, 13.610000000000001, 20.975]
+        ],
+        materials: [4, 2, 4, 4, 3, 3, 2, 2, 4, 3, 4, 4, 3, 2, 2, 1, 2],
+        sizes: [10, 10, 20, 20, 25, 20, 20, 25, 10, 10, 20, 10, 20, 10, 10, 10, 10]
+    }
+</code></pre>
+</article>
+</div>
+</article></div>
+<div class="magicItem next pagedown" data-transition="fade"><article>
+<div class="magic-wrapper">
+<article>
+<pre><code class="javascript">
+    var vertices = cotem.vertices, 
+        positions = new Float32Array(3 * vertices.length), 
+        singleSizes = new Float32Array(vertices.length), 
+        idxs = new Float32Array(vertices.length), 
+        matids = new Float32Array(vertices.length), 
+        singleSizes = new Float32Array(vertices.length),
+        sizes = cotem.sizes, 
+        materials = cotem.materials;
+    var geometry = new THREE.BufferGeometry();
+    for(var i = 0; i < vertices.length; i++){
+        vertices[i] = (new THREE.Vector3()).fromArray(vertices[i]);
+    }
+    for (var i = 0; i < vertices.length; i++){
+        positions[3 * i] = vertices[i].x;
+        positions[3 * i + 1] = vertices[i].y;
+        positions[3 * i + 2] = vertices[i].z;
+        matids[i] = materials[i];
+        idxs[i] = i;
+        singleSizes[i] = sizes[i];
+        geometry.addAttribute("position", new THREE.BufferAttribute(positions,3));
+        geometry.addAttribute("idx", new THREE.BufferAttribute(idxs,1));
+        geometry.addAttribute("matid", new THREE.BufferAttribute(matids,1));
+        geometry.addAttribute("size", new THREE.BufferAttribute(singleSizes,1)); 
+    }
+</code></pre>
+</article>
+</div>
+</article></div>
+<div class="magicItem far-next pagedown" data-transition="fade"><article>
+<div class="magic-wrapper">
+<article>
+<pre><code class="javascript">
+    var pointMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            texture1: {
+                type: "t",
+                value: new THREE.TextureLoader().load(starTexture[0])
+            },
+            texture2: {
+                type: "t",
+                value: new THREE.TextureLoader().load(starTexture[1])
+            },
+            texture3: {
+                type: "t",
+                value: new THREE.TextureLoader().load(starTexture[2])
+            },
+            texture4: {
+                type: "t",
+                value: new THREE.TextureLoader().load(starTexture[3])
+            },
+            timeline: {
+                type: "f",
+                value: 0
+            }
+        },
+        vertexShader: document.getElementById("vertex-shader").textContent,
+        fragmentShader: document.getElementById("fragment-shader").textContent,
+        blending: THREE.AdditiveBlending,
+        depthTest: false,
+        transparent: true
+    });
+</code></pre>
+</article>
+</div>
+</article></div>
+<div class="magicItem " data-transition="fade"><article>
+<div class="magic-wrapper">
+<article>
+<div>
+    <pre><code class="javascript">
+    &lt;script type="x-shader/x-vertex" id="vertex-shader">
+        attribute float size;
+        attribute float idx;
+        attribute float matid;
+
+        uniform float timeline;
+
+        varying vec4 vColor;
+        varying float vMatid;
+
+        void main() {
+            vec3 color = vec3(1.0,1.0,1.0);
+            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+
+            float alpha = 1.0;
+            float enlarge = .0;
+
+            if(length(mvPosition.xyz) < 400.0) {
+                enlarge = (sin(timeline - idx) * 40.0);
+            } else {
+                enlarge = (sin(timeline - idx) * 10.0);
+            }
+
+
+            if(enlarge < 0.1) {
+                enlarge = .0 - enlarge + 1.0;
+            }
+
+            vColor = vec4(color, alpha);
+            vMatid = matid;
+
+            gl_Position = projectionMatrix * mvPosition;
+            gl_PointSize = 1500.0 / length(mvPosition.xyz) * size + enlarge;
+
+        }
+    &lt;/script>    
+    </code></pre>
+</div>
+</article>
+</div>
+</article></div>
+<div class="magicItem " data-transition="fade"><article>
+<div class="magic-wrapper">
+<article>
+<div>
+    <pre><code class="javascript">
+    &lt;script type="x-shader/x-fragment" id="fragment-shader">
+        uniform sampler2D texture1;
+        uniform sampler2D texture2;
+        uniform sampler2D texture3;
+        uniform sampler2D texture4;
+        varying vec4 vColor;
+        varying float vMatid;
+
+        void main() {
+            if(vMatid > 3.5) {
+                gl_FragColor = vColor * texture2D(texture4, gl_PointCoord) ;
+            } else if(vMatid > 2.5) {
+                gl_FragColor = vColor * texture2D(texture3, gl_PointCoord) ;
+            } else if(vMatid > 1.5) {
+                gl_FragColor = vColor * texture2D(texture2, gl_PointCoord) ;
+            } else {
+                gl_FragColor = vColor * texture2D(texture1, gl_PointCoord) ;
+            }
+        }
+    &lt;/script>    
+    </code></pre>
+</div>
+</article>
+</div>
+</article></div></div></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.2</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide3',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<script src="./js/three.js"></script>
+<script src="./js/tween.min.js"></script>
+<script src="./js/CSS3DRenderer.js"></script>
+<script src="./js/TrackballControls.js"></script>
+<script src="./js/TweenMax.min.js"></script>
+<script src="./js/CSS3DRenderer.js"></script>
+<script src="./js/index.js"></script>
+<link rel="stylesheet" href="./css/index.css">
+
+<!--placeholder-->
+</body>
+</html>
