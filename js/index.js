@@ -73,7 +73,7 @@ var initForMesh = function(){
 var animateForMesh = function() {
 	initForMesh();
 	setTimeout(function(){
-		document.getElementById('mesh-container').style="transform:translateX(-300px)";
+		document.getElementById('mesh-container').style="transform:translateX(-400px)";
 		document.getElementById('mesh-desc').style = "opacity:1";
 	}, 1000);
 }
