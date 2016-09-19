@@ -7,7 +7,7 @@
 	cursor: pointer;
 }
 #mesh-container{
-	transition:transform .8s linear; 
+	transition:transform 1.2s linear; 
 }
 #mesh-desc{
 	position: absolute;
@@ -125,4 +125,7 @@ slides>slide .slide-wrapper img.tuxing{
 	width: 800px;
 	height: 800px;
 	margin: 0 auto;
+}
+small {
+	font-size: 20px;
 }
