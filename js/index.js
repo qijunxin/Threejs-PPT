@@ -54,7 +54,7 @@ var initForMesh = function(){
 
     addTexture = function(){
     	scene.remove(currentMesh);
-    	texture = new THREE.TextureLoader().load('http://p6.qhimg.com/t0108371a1bb1b8e245.jpg');
+    	texture = new THREE.TextureLoader().load('https://p0.ssl.qhimg.com/t0108371a1bb1b8e245.jpg');
     	mat = new THREE.MeshBasicMaterial({map:texture});
 	    currentMesh = new THREE.Mesh(currentGeometry, mat)
 	    scene.add(currentMesh)
@@ -253,43 +253,6 @@ var initCameraDemo = function(){
 	}
 }
 
-/******************************************/
-var clearSimple = function(){
-	document.getElementById("demo-1-container").innerHTML = "";
-}
-var simpleDemo = function(){
-	var renderer, camera, scene, light, cube;
-	var container = document.getElementById("demo-1-container");
-	renderer = new THREE.WebGLRenderer({antialias:true});
-	renderer.setSize(container.offsetWidth,container.offsetHeight);
-	renderer.setClearColor(0x232323);
-	container.appendChild(renderer.domElement);
-
-	scene = new THREE.Scene();
-
-	camera = new THREE.PerspectiveCamera(45,container.offsetWidth/container.offsetHeight,1,1000);
-	camera.position.z = 550;
-	camera.lookAt(scene.position);
-	scene.add(camera);
-
-	light = new THREE.DirectionalLight(0xf0f0f0);
-	light.position.set(0,0,500);
-	scene.add(light);
-
-	var geometry = new THREE.BoxGeometry(200,200,200);
-	var texture = new THREE.TextureLoader().load('http://p7.qhimg.com/t01caaf0a38d2069b4a.png');
-	var material = new THREE.MeshLambertMaterial( {map:texture});
-	cube = new THREE.Mesh( geometry, material);
-	scene.add(cube);
-	
-	render();
-	function render(){
-		cube.rotation.x = 45;
-		cube.rotation.y = 45;
-		renderer.render(scene,camera);
-		requestAnimationFrame(render);
-	}
-}
 
 /******************************************/
 var clearRAF = function(){
@@ -314,7 +277,7 @@ var RAFDemo = function(){
 		// earth
 
 		var loader = new THREE.TextureLoader();
-		var texture = loader.load( 'http://p8.qhimg.com/t014de28b7cbcea05f7.jpg');
+		var texture = loader.load( 'https://p2.ssl.qhimg.com/t014de28b7cbcea05f7.jpg');
 		var geometry = new THREE.SphereGeometry( 200, 20, 20 );
 
 		var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
